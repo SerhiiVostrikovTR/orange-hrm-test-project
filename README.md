@@ -16,4 +16,4 @@ Tecnologies used:
 To run our test suite:
 1. Open terminal.
 2. Navigate to the path the project was cloned in.
-3. Run `npm test`
+3. Run `npm run wdio`
