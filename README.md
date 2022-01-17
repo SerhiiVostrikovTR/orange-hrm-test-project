@@ -9,6 +9,10 @@ Tecnologies used:
 ## Setup
 1. Clone this repository
 2. Install the dependencies of this project with `npm install`.
+3. Rename example.env file to .env and configure environment variables
+
+## Environment variables
+`TEST_ENVIRONMENT` - env on which tests will be executed (possible options: dev, test, prod)
 
 
 ## Running test suite
