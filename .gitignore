@@ -1,0 +1,15 @@
+node_modules/
+node_modules
+package-lock.json
+logs/screenshot/*.png
+logs/results/*.log
+logs/results/*.png
+logs/results/*.xml
+logs/.DS_Store
+.DS_Store
+.env
+.vscode/
+launch.json
+.env
+reports/
+logs/
