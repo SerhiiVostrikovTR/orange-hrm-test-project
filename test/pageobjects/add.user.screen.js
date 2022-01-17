@@ -1,6 +1,7 @@
 const Page = require('./page');
-const customActions = require('../../utils/custom_actions.js');
-const { PasswordStatuses } = require('../constants/password.status');
+const customActions = require('../../utils/custom.actions.js');
+const { PasswordStatuses } = require('../constants/password.status.js');
+const { UserRoleTypes, UserStatusTypes } = require('../constants/add.user.props.js');
 
 class AddUserScreen extends Page {
     get userRoleDropdown() { return $('#systemUser_userType');}
@@ -13,7 +14,7 @@ class AddUserScreen extends Page {
     get saveBtn() { return $('#btnSave'); }
     get passwordStrongChecker() { return $('#systemUser_password_strength_meter'); }
 
-    async setUserRole(usrRole) { await this.userRoleDropdown.selectByAttribute('value', usrRole === 'ESS' ? 2 : 1); }
+    async setUserRole(usrRole) { await this.userRoleDropdown.selectByAttribute('value', usrRole === UserRoleTypes.ESS ? 2 : 1); }
 
     async enterEmployeeName(empName) {
         await customActions.enterTextIntoTextField(this.employeeName, empName);
@@ -28,7 +29,7 @@ class AddUserScreen extends Page {
     async enterUsername(usName) { await customActions.enterTextIntoTextField(this.userName, usName); }
 
     async setUserStatus(status) {
-        await this.userStatusDropdown.selectByAttribute('value', status === 'Enabled' ? 1 : 0);
+        await this.userStatusDropdown.selectByAttribute('value', status === UserStatusTypes.ENABLED ? 1 : 0);
     }
 
     async enterPassword(pwd) { 
@@ -57,7 +58,7 @@ class AddUserScreen extends Page {
             async () => (await this.passwordStrongChecker.getText()) === pwdStatus,
             {
                 timeout: 5000,
-                timeoutMsg: 'expected password status Strongest to be different after 5s'
+                timeoutMsg: `expected password status ${pwdStatus} to be different after 5s`
             }
         );
     }

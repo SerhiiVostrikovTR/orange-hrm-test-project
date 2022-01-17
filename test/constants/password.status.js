@@ -6,4 +6,4 @@ class PasswordStatuses {
     static STRONGEST = 'Strongest';
 }
 
-module.exports =  {PasswordStatuses}
+module.exports = { PasswordStatuses };

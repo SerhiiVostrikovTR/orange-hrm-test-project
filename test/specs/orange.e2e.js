@@ -1,8 +1,10 @@
+const { config } = require('../../wdio.conf');
 const LoginPage = require('../pageobjects/login.page');
 const HomePage = require('../pageobjects/homepage');
-const AdminTabScreen = require('../pageobjects/admin_tab_screen.js');
-const AddUserScreen = require('../pageobjects/add_user_screen.js');
-const fakeData = require('../../utils/fake_data.js');
+const AdminTabScreen = require('../pageobjects/admin.tab.screen.js');
+const AddUserScreen = require('../pageobjects/add.user.screen.js');
+const { UserRoleTypes, UserStatusTypes } = require('../constants/add.user.props.js');
+const fakeData = require('../../utils/fake.data.js');
 const expect = require('expect');
 
 afterAll(async () => {
@@ -12,7 +14,7 @@ afterAll(async () => {
 describe('Create/delete user e2e test', () => {
     it('should login with valid credentials, add and remove user', async () => {
         await LoginPage.open();
-        expect(await browser.getUrl()).toEqual('https://opensource-demo.orangehrmlive.com/login');
+        expect(await browser.getUrl()).toEqual(`${config.testEnvUrl}login`);
 
         console.log('Get credentials from the page');
         const creds = await LoginPage.getCredentialsFromScreen();
@@ -23,10 +25,9 @@ describe('Create/delete user e2e test', () => {
         expect(await HomePage.adminTab.isDisplayed()).toBeTruthy();
 
         const addUserProps = {
-            userRole: 'ESS',
-            employeeName: '',
+            userRole: UserRoleTypes.ESS,
             userName: fakeData.fakeFullName(),
-            status: 'Enabled',
+            status: UserStatusTypes.ENABLED,
             password: fakeData.fakePassword()
         }
         

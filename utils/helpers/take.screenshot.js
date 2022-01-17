@@ -1,4 +1,3 @@
-// import { access, constants } from 'fs';
 const { access, constants } = require('fs');
 
 async function takeScreenshot(path, image) {

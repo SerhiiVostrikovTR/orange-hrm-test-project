@@ -1,4 +1,4 @@
-const envUrl = require('../orange-hrm-test-project/test/constants/env_urls.js');
+const envUrl = require('./test/constants/env.urls.js');
 const takeScreenshot = require("./utils/helpers/take.screenshot").takeScreenshot
 exports.config = {
     testEnvUrl: envUrl.getUrl(process.env.TEST_ENVIRONMENT),
@@ -156,7 +156,6 @@ exports.config = {
         // an assertion fails.
         expectationResultHandler: function(passed, assertion) {
             // do something
-            console.log(passed)
         }
     },
     

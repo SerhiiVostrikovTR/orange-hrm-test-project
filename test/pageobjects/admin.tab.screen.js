@@ -1,6 +1,6 @@
 const Page = require('./page');
-const DeleteUserModal = require('../pageobjects/modals/delete.user.modal.js');
-const customActions = require('../../utils/custom_actions.js');
+const DeleteUserModal = require('./modals/delete.user.modal.js');
+const customActions = require('../../utils/custom.actions.js');
 
 class AdminTabScreen extends Page {
 

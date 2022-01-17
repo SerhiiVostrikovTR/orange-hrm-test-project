@@ -1,5 +1,5 @@
 const Page = require('./page');
-const customActions = require('../../utils/custom_actions.js');
+const customActions = require('../../utils/custom.actions.js');
 
 class HomePage extends Page {
     get adminTab() { return $('#menu_admin_viewAdminModule'); }
