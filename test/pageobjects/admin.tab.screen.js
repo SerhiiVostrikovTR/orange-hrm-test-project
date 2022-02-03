@@ -10,6 +10,7 @@ class AdminTabScreen extends Page {
     get btnDelete() { return $('#btnDelete'); }
     get searchUsername() { return $('#searchSystemUser_userName'); }
     get table() { return $$('#resultTable tbody tr td.left'); }
+    get resultTable() {return $('#resultTable')}
     get usrLinkTable() { return $('#resultTable tbody tr td.left a'); }
     get userCheckbox() { return $('#resultTable tbody td input'); }
     get noRecordsInTable() {return $("#resultTable tbody tr td[colspan='5']")}
@@ -28,12 +29,12 @@ class AdminTabScreen extends Page {
         await this.enterUsernameSearch(usName);
         await this.searchUserBtnClick();
         if (!isDeleted){
-            await this.usrLinkTable.waitForExist({timeout: 2000});
+            await this.usrLinkTable.waitForExist({timeout: 4000});
             await browser.waitUntil(
                 async () => (await this.usrLinkTable.getText()) === usName,
                 {
-                    timeout: 2000,
-                    timeoutMsg: `username ${usName} wasn't showed after 5s`
+                    timeout: 4000,
+                    timeoutMsg: `username ${usName} wasn't showed after 4s`
                 }
             );
         }
@@ -60,12 +61,15 @@ class AdminTabScreen extends Page {
     async deleteUserFlow(id) {
         await this.selectCheckboxByUserId(id);
         await this.deleteUserBtnClick();
+        await DeleteUserModal.deleteBtn.waitForDisplayed({ timeout: 2000 });
         await DeleteUserModal.confirmDelete();
     }
 
     async checkThatUserWasDeleted(usrName) {
         await this.searchByUsername(usrName, true);
-        const isDeleted = await this.noRecordsInTable.isDisplayed();
+        const table = await this.resultTable;
+        await table.scrollIntoView();
+        const isDeleted = await this.noRecordsInTable.waitForDisplayed({ timeout: 4000 });
         return isDeleted;
     }
 }

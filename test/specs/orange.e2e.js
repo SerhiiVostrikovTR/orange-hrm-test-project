@@ -1,4 +1,4 @@
-const { config } = require('../../wdio.conf');
+const { config } = require('../../configs/wdio.shared.conf');
 const LoginPage = require('../pageobjects/login.page');
 const HomePage = require('../pageobjects/homepage');
 const AdminTabScreen = require('../pageobjects/admin.tab.screen.js');
@@ -6,10 +6,6 @@ const AddUserScreen = require('../pageobjects/add.user.screen.js');
 const { UserRoleTypes, UserStatusTypes } = require('../constants/add.user.props.js');
 const fakeData = require('../../utils/fake.data.js');
 const expect = require('expect');
-
-afterAll(async () => {
-    await browser.deleteSession();
-  });
 
 describe('Create/delete user e2e test', () => {
     it('should login with valid credentials, add and remove user', async () => {
@@ -19,9 +15,13 @@ describe('Create/delete user e2e test', () => {
         console.log('Get credentials from the page');
         const creds = await LoginPage.getCredentialsFromScreen();
         
-        console.log('Login to the page using credentials');
+        console.log('Login to the page using credentials', creds.username, creds.pwd);
         await LoginPage.login(creds.username, creds.pwd);
 
+        console.log("Wait for homepage loaded");
+        await HomePage.waitForHomepageLoaded();
+
+        console.log("Check that admin tab is displayed");
         expect(await HomePage.adminTab.isDisplayed()).toBeTruthy();
 
         const addUserProps = {
@@ -38,7 +38,7 @@ describe('Create/delete user e2e test', () => {
 
         console.log('Click Add button');
         await AdminTabScreen.addUserBtnClick();
-
+        
         console.log(`Addining user with username: ${addUserProps.userName}, employee name: ${addUserProps.employeeName}, and password ${addUserProps.password}`);
         const savedUser = await AddUserScreen.setUserPropsAndSave(
             addUserProps.userRole,
@@ -47,7 +47,7 @@ describe('Create/delete user e2e test', () => {
             addUserProps.status, 
             addUserProps.password
             );
-
+        
         addUserProps.employeeName = savedUser.fullEmployeeName;
         
         console.log(`Seach user with username ${addUserProps.userName}`);
@@ -57,13 +57,16 @@ describe('Create/delete user e2e test', () => {
         const tableData = await AdminTabScreen.getRowData();
         
         expect([...tableData]).toEqual([addUserProps.userName, addUserProps.userRole, addUserProps.employeeName, addUserProps.status]);
-
+        
         const userId = await AdminTabScreen.getUserId();
-
+        
+        console.log('Click reset search button');
         await AdminTabScreen.resetSearchUserBtnClick();
-
+        
+        console.log(`Remove user with id ${userId}`);
         await AdminTabScreen.deleteUserFlow(userId);
-
+        
+        console.log(`Check that user ${addUserProps.userName} was deleted`);
         const isDeletedUser = await AdminTabScreen.checkThatUserWasDeleted(addUserProps.userName);
         expect(isDeletedUser).toBeTruthy();
     });

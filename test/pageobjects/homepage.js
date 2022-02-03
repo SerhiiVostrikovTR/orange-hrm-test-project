@@ -15,6 +15,10 @@ class HomePage extends Page {
         const username = welcomeText.split(' ');
         return username.pop();
     } 
+
+    async waitForHomepageLoaded() {
+        await this.currentUserName.waitForDisplayed({ timeout: 5000 })
+    }
 }
 
 module.exports = new HomePage();
