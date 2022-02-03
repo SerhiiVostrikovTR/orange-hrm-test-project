@@ -47,7 +47,7 @@ describe('Create/delete user e2e test', () => {
             addUserProps.status, 
             addUserProps.password
             );
-        
+
         addUserProps.employeeName = savedUser.fullEmployeeName;
         
         console.log(`Seach user with username ${addUserProps.userName}`);
@@ -57,7 +57,7 @@ describe('Create/delete user e2e test', () => {
         const tableData = await AdminTabScreen.getRowData();
         
         expect([...tableData]).toEqual([addUserProps.userName, addUserProps.userRole, addUserProps.employeeName, addUserProps.status]);
-        
+
         const userId = await AdminTabScreen.getUserId();
         
         console.log('Click reset search button');
