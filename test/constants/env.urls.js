@@ -1,7 +1,7 @@
 require('dotenv').config({path: '.env'});
-ENV_URLS = {dev: '',
+ENV_URLS = {dev: 'https://opensource-demo.orangehrmlive.com/',
             test: 'https://opensource-demo.orangehrmlive.com/',
-            prod: ''};
+            prod: 'https://opensource-demo.orangehrmlive.com/'};
 
 function getUrl(env) {
     if (!Object.keys(this.ENV_URLS).includes(env))
