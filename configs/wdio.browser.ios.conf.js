@@ -7,7 +7,7 @@ config.capabilities = [
         maxInstances: 1,
         'appium:deviceName': 'iPhone 12',
         'appium:platformVersion': '14.4',
-        'appium:orientation': 'LANDSCAPE',
+        'appium:orientation': 'PORTRAIT',
         'appium:automationName': 'XCUITest',
         'appium:newCommandTimeout': 240,
     },
