@@ -4,16 +4,19 @@ const customActions = require('../../utils/custom.actions.js');
 
 class AdminTabScreen extends Page {
 
+    static checkboxById = '#ohrmList_chkSelectRecord_';
+    static resultTableLocator = '#resultTable';
+
     get btnAdd() { return $('#btnAdd'); }
     get btnSearch() { return $('#searchBtn'); }
     get btnReset() { return $('#resetBtn'); }
     get btnDelete() { return $('#btnDelete'); }
     get searchUsername() { return $('#searchSystemUser_userName'); }
-    get table() { return $$('#resultTable tbody tr td.left'); }
-    get resultTable() {return $('#resultTable')}
-    get usrLinkTable() { return $('#resultTable tbody tr td.left a'); }
-    get userCheckbox() { return $('#resultTable tbody td input'); }
-    get noRecordsInTable() {return $("#resultTable tbody tr td[colspan='5']")}
+    get table() { return $$(`${AdminTabScreen.resultTableLocator} tbody tr td.left`); }
+    get resultTable() { return $(`${AdminTabScreen.resultTableLocator}`); }
+    get usrLinkTable() { return $(`${AdminTabScreen.resultTableLocator} tbody tr td.left a`); }
+    get userCheckbox() { return $(`${AdminTabScreen.resultTableLocator} tbody td input`); }
+    get noRecordsInTable() {return $(`${AdminTabScreen.resultTableLocator} tbody tr td[colspan='5']`)}
 
     async addUserBtnClick() {  await customActions.waitForBtnAndClick(this.btnAdd); }
 
@@ -53,7 +56,7 @@ class AdminTabScreen extends Page {
     }
 
     async selectCheckboxByUserId(id) {
-        const checkbox = await $(`#ohrmList_chkSelectRecord_${id}`);
+        const checkbox = await $(`${AdminTabScreen.checkboxById}${id}`);
         await checkbox.scrollIntoView();
         await checkbox.click();
     }
