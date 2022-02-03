@@ -4,12 +4,14 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "wdio": "wdio run wdio.conf.js"
+        "desktopChrome": "wdio run configs/wdio.local.chrome.conf.js",
+        "iOSChrome": "wdio run configs/wdio.browser.ios.conf.js"
     },
     "keywords": [],
     "author": "Serhii Vostrikov",
     "license": "ISC",
     "devDependencies": {
+        "@wdio/appium-service": "^7.16.14",
         "@wdio/cli": "^7.16.13",
         "@wdio/jasmine-framework": "^7.16.13",
         "@wdio/junit-reporter": "^7.16.13",
@@ -21,6 +23,7 @@
         "wdio-wait-for": "^2.2.1"
     },
     "dependencies": {
+        "appium": "^1.22.2",
         "dotenv": "^14.1.0"
     }
 }
