@@ -38,7 +38,7 @@ describe('Create/delete user e2e test', () => {
 
         console.log('Click Add button');
         await AdminTabScreen.addUserBtnClick();
-        
+
         console.log(`Addining user with username: ${addUserProps.userName}, employee name: ${addUserProps.employeeName}, and password ${addUserProps.password}`);
         const savedUser = await AddUserScreen.setUserPropsAndSave(
             addUserProps.userRole,
