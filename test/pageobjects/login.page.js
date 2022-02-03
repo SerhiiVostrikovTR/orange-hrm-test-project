@@ -11,13 +11,6 @@ class LoginPage extends Page {
         await customActions.enterTextIntoTextField(this.inputUsername, username);
         await customActions.enterTextIntoTextField(this.inputPassword, password);
         await customActions.waitForBtnAndClick(this.btnLogin);
-        // await browser.waitUntil(
-        //     async () => (await this.btnLogin.isDisplayed()) === false,
-        //     {
-        //         timeout: 10000,
-        //         timeoutMsg: `Homepage wasn't loaded after 10s`
-        //     }
-        // );
         await this.btnLogin.waitForDisplayed({ timeout: 5000, reverse: true });
     }
 
