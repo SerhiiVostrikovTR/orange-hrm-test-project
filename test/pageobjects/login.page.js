@@ -1,5 +1,6 @@
 const Page = require('./page');
-const customActions = require('../../utils/custom.actions.js')
+const customActions = require('../../utils/custom.actions.js');
+const { CREDENTIALS } = require('../constants/credentials.template.js')
 
 class LoginPage extends Page {
     get inputUsername() { return $('#txtUsername'); }
@@ -16,8 +17,7 @@ class LoginPage extends Page {
 
     async getCredentialsFromScreen() {
         const credentialsStr = await this.credentials.getText();
-        const credentialsPattern = /^\( Username : (\w+) \| Password : (\w+) \)$/;
-        const[all, username, pwd] = credentialsStr.match(credentialsPattern);
+        const[all, username, pwd] = credentialsStr.match(CREDENTIALS);
         if (!username || !pwd){
             throw 'Credentials was not provided';
         }
