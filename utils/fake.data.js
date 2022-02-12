@@ -1,5 +1,5 @@
-const faker = require("faker");
-faker.locale = "en";
+const faker = require('faker');
+faker.locale = 'en';
 
 const fakeFullName = () => {
   // Create unique username
